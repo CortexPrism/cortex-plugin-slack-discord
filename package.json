@@ -1,7 +1,7 @@
 {
   "name": "cortex-plugin-slack-discord",
-  "version": "1.0.0",
-  "description": "Slack / Discord Channel Adapter — Cortex agent as a bot in team chat platforms",
+  "version": "1.0.1",
+  "description": "Slack / Discord Channel Adapter \u2014 Cortex agent as a bot in team chat platforms",
   "type": "module",
   "main": "mod.ts",
   "scripts": {

@@ -1,7 +1,7 @@
 {
   "name": "cortex-plugin-slack-discord",
-  "version": "1.0.0",
-  "description": "Cortex agent as a bot in Slack and Discord channels — respond to @mentions, send notifications, push daily standup summaries, and trigger workflows from chat",
+  "version": "1.0.1",
+  "description": "Cortex agent as a bot in Slack and Discord channels \u2014 respond to @mentions, send notifications, push daily standup summaries, and trigger workflows from chat",
   "kind": "esm",
   "entryPoint": "mod.ts",
   "runtime": "deno",
@@ -168,7 +168,11 @@
           "type": "string",
           "description": "Platform(s) to send to",
           "required": false,
-          "enum": ["slack", "discord", "both"]
+          "enum": [
+            "slack",
+            "discord",
+            "both"
+          ]
         },
         {
           "name": "slack_channel",
@@ -257,8 +261,14 @@
   },
   "aiDisclosure": {
     "tools": [
-      "Claude Code (Anthropic) — initial scaffold and implementation"
+      "Claude Code (Anthropic) \u2014 initial scaffold and implementation"
     ],
     "humanReview": true
-  }
+  },
+  "events": [
+    "tool:post-execute",
+    "session:start",
+    "session:end",
+    "agent:turn-end"
+  ]
 }

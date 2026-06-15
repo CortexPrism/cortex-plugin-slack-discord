@@ -177,3 +177,14 @@ cortex plugin call cortex-plugin-slack-discord discord_read_channel '{"channel_i
 ## License
 
 MIT
+
+## Events
+
+This plugin subscribes to the Cortex event bus for real-time processing:
+
+| Event | Purpose |
+|-------|---------|
+|  | Trigger notifications when tools complete |
+|  | Detect new agent sessions |
+|  | Trigger cleanup on session end |
+|  | Send standup summaries after agent turns |

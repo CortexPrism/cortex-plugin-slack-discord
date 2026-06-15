@@ -1,0 +1,264 @@
+{
+  "name": "cortex-plugin-slack-discord",
+  "version": "1.0.0",
+  "description": "Cortex agent as a bot in Slack and Discord channels — respond to @mentions, send notifications, push daily standup summaries, and trigger workflows from chat",
+  "kind": "esm",
+  "entryPoint": "mod.ts",
+  "runtime": "deno",
+  "author": "CortexPrism",
+  "license": "MIT",
+  "repository": "https://github.com/CortexPrism/cortex-plugin-slack-discord",
+  "homepage": "https://cortexprism.io/marketplace/plugins/slack-discord",
+  "capabilities": [
+    "tools",
+    "network:fetch",
+    "events:listener"
+  ],
+  "tools": [
+    {
+      "name": "slack_send_message",
+      "description": "Send a message to a Slack channel or user. Supports Markdown formatting and Block Kit.",
+      "params": [
+        {
+          "name": "channel",
+          "type": "string",
+          "description": "Slack channel ID or name (e.g., '#general' or 'C01234567')",
+          "required": true
+        },
+        {
+          "name": "text",
+          "type": "string",
+          "description": "Message text (supports Slack mrkdwn formatting)",
+          "required": true
+        },
+        {
+          "name": "thread_ts",
+          "type": "string",
+          "description": "Thread timestamp to reply in a thread (optional)",
+          "required": false
+        },
+        {
+          "name": "blocks",
+          "type": "string",
+          "description": "JSON string of Slack Block Kit blocks for rich messages (optional)",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "slack_read_channel",
+      "description": "Read recent messages from a Slack channel. Useful for catching up on conversations or finding context.",
+      "params": [
+        {
+          "name": "channel",
+          "type": "string",
+          "description": "Slack channel ID or name",
+          "required": true
+        },
+        {
+          "name": "limit",
+          "type": "number",
+          "description": "Number of messages to retrieve (default: 20, max: 100)",
+          "required": false
+        },
+        {
+          "name": "oldest",
+          "type": "string",
+          "description": "Oldest message timestamp to include (UNIX seconds)",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "slack_list_channels",
+      "description": "List all channels the Slack bot has access to, with IDs and member counts.",
+      "params": [
+        {
+          "name": "types",
+          "type": "string",
+          "description": "Comma-separated channel types to list",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "slack_add_reaction",
+      "description": "Add an emoji reaction to a Slack message.",
+      "params": [
+        {
+          "name": "channel",
+          "type": "string",
+          "description": "Slack channel ID containing the message",
+          "required": true
+        },
+        {
+          "name": "timestamp",
+          "type": "string",
+          "description": "Message timestamp to react to",
+          "required": true
+        },
+        {
+          "name": "emoji",
+          "type": "string",
+          "description": "Emoji name without colons (e.g., 'thumbsup', 'rocket')",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "discord_send_message",
+      "description": "Send a message to a Discord channel. Supports embeds and Markdown.",
+      "params": [
+        {
+          "name": "channel_id",
+          "type": "string",
+          "description": "Discord channel ID (snowflake)",
+          "required": true
+        },
+        {
+          "name": "content",
+          "type": "string",
+          "description": "Message text (supports Discord Markdown)",
+          "required": true
+        },
+        {
+          "name": "embeds",
+          "type": "string",
+          "description": "JSON string of Discord embed objects for rich messages",
+          "required": false
+        },
+        {
+          "name": "reply_to",
+          "type": "string",
+          "description": "Message ID to reply to (optional)",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "discord_read_channel",
+      "description": "Read recent messages from a Discord channel.",
+      "params": [
+        {
+          "name": "channel_id",
+          "type": "string",
+          "description": "Discord channel ID (snowflake)",
+          "required": true
+        },
+        {
+          "name": "limit",
+          "type": "number",
+          "description": "Number of messages to retrieve (default: 50, max: 100)",
+          "required": false
+        },
+        {
+          "name": "before",
+          "type": "string",
+          "description": "Get messages before this message ID (for pagination)",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "send_daily_standup",
+      "description": "Generate and send a daily standup summary to configured Slack and/or Discord channels. Pulls from Cortex session history to summarize what was worked on.",
+      "params": [
+        {
+          "name": "platform",
+          "type": "string",
+          "description": "Platform(s) to send to",
+          "required": false,
+          "enum": ["slack", "discord", "both"]
+        },
+        {
+          "name": "slack_channel",
+          "type": "string",
+          "description": "Slack channel for the standup (overrides default)",
+          "required": false
+        },
+        {
+          "name": "discord_channel_id",
+          "type": "string",
+          "description": "Discord channel for the standup (overrides default)",
+          "required": false
+        },
+        {
+          "name": "custom_message",
+          "type": "string",
+          "description": "Optional custom message to include in the standup",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "webhook_listen_status",
+      "description": "Check the status of the Slack/Discord event listeners and webhook configurations.",
+      "params": []
+    }
+  ],
+  "peerDependencies": {
+    "cortex": ">=1.0.0"
+  },
+  "ui": {
+    "settings": [
+      {
+        "section": "Slack",
+        "fields": [
+          {
+            "key": "slackBotToken",
+            "label": "Slack Bot Token",
+            "type": "secret",
+            "description": "Slack Bot User OAuth Token (xoxb-...)"
+          },
+          {
+            "key": "slackAppToken",
+            "label": "Slack App Token",
+            "type": "secret",
+            "description": "Slack App-Level Token for Socket Mode (xapp-...)"
+          },
+          {
+            "key": "defaultSlackChannel",
+            "label": "Default Slack Channel",
+            "type": "text",
+            "description": "Default Slack channel for standups and notifications (e.g., '#general')"
+          }
+        ]
+      },
+      {
+        "section": "Discord",
+        "fields": [
+          {
+            "key": "discordBotToken",
+            "label": "Discord Bot Token",
+            "type": "secret",
+            "description": "Discord bot token from the Developer Portal"
+          },
+          {
+            "key": "defaultDiscordChannelId",
+            "label": "Default Discord Channel ID",
+            "type": "text",
+            "description": "Default Discord channel snowflake ID for standups and notifications"
+          }
+        ]
+      },
+      {
+        "section": "Scheduling",
+        "fields": [
+          {
+            "key": "standupTime",
+            "label": "Standup Time (UTC)",
+            "type": "text",
+            "defaultValue": "09:00",
+            "description": "Time in UTC to send daily standup (HH:MM format)"
+          }
+        ]
+      }
+    ]
+  },
+  "aiDisclosure": {
+    "tools": [
+      "Claude Code (Anthropic) — initial scaffold and implementation"
+    ],
+    "humanReview": true
+  }
+}

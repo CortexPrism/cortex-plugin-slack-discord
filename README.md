@@ -1,6 +1,7 @@
 # CortexPrism Slack / Discord Channel Adapter
 
-Cortex agent as a bot in Slack and Discord channels — respond to @mentions, send notifications, push daily standup summaries, and trigger workflows directly from chat.
+Cortex agent as a bot in Slack and Discord channels — respond to @mentions, send notifications, push
+daily standup summaries, and trigger workflows directly from chat.
 
 ## Installation
 
@@ -36,20 +37,21 @@ cortex plugin install .
 
 ### Configuration
 
-| Setting | Type | Default | Description |
-|---------|------|---------|-------------|
-| `slackBotToken` | string (secret) | — | Slack Bot User OAuth Token (`xoxb-...`) |
-| `slackAppToken` | string (secret) | — | Slack App-Level Token for Socket Mode (`xapp-...`) |
-| `discordBotToken` | string (secret) | — | Discord bot token from Developer Portal |
-| `defaultSlackChannel` | string | — | Default Slack channel for standups and notifications |
-| `defaultDiscordChannelId` | string | — | Default Discord channel ID for standups and notifications |
-| `standupTime` | string | `09:00` | UTC time for daily standup (HH:MM) |
+| Setting                   | Type            | Default | Description                                               |
+| ------------------------- | --------------- | ------- | --------------------------------------------------------- |
+| `slackBotToken`           | string (secret) | —       | Slack Bot User OAuth Token (`xoxb-...`)                   |
+| `slackAppToken`           | string (secret) | —       | Slack App-Level Token for Socket Mode (`xapp-...`)        |
+| `discordBotToken`         | string (secret) | —       | Discord bot token from Developer Portal                   |
+| `defaultSlackChannel`     | string          | —       | Default Slack channel for standups and notifications      |
+| `defaultDiscordChannelId` | string          | —       | Default Discord channel ID for standups and notifications |
+| `standupTime`             | string          | `09:00` | UTC time for daily standup (HH:MM)                        |
 
 ## Tools
 
 ### Slack
 
 #### `slack_send_message`
+
 Send a message to a Slack channel or user.
 
 ```json
@@ -61,6 +63,7 @@ Send a message to a Slack channel or user.
 ```
 
 #### `slack_read_channel`
+
 Read recent messages from a Slack channel.
 
 ```json
@@ -71,6 +74,7 @@ Read recent messages from a Slack channel.
 ```
 
 #### `slack_list_channels`
+
 List all available channels.
 
 ```json
@@ -78,6 +82,7 @@ List all available channels.
 ```
 
 #### `slack_add_reaction`
+
 Add an emoji reaction to a message.
 
 ```json
@@ -91,6 +96,7 @@ Add an emoji reaction to a message.
 ### Discord
 
 #### `discord_send_message`
+
 Send a message to a Discord channel.
 
 ```json
@@ -102,6 +108,7 @@ Send a message to a Discord channel.
 ```
 
 #### `discord_read_channel`
+
 Read recent messages from a Discord channel.
 
 ```json
@@ -115,6 +122,7 @@ Read recent messages from a Discord channel.
 ### Cross-Platform
 
 #### `send_daily_standup`
+
 Generate and send a daily standup summary.
 
 ```json
@@ -125,6 +133,7 @@ Generate and send a daily standup summary.
 ```
 
 #### `webhook_listen_status`
+
 Check the configuration status of Slack and Discord integrations.
 
 ```json
@@ -156,10 +165,10 @@ slack_send_message → {
 
 ## Capabilities
 
-| Capability | Purpose |
-|------------|---------|
-| `network:fetch` | Slack and Discord API access for messaging and channel operations |
-| `events:listener` | Real-time event handling for bot mentions and interactions |
+| Capability        | Purpose                                                           |
+| ----------------- | ----------------------------------------------------------------- |
+| `network:fetch`   | Slack and Discord API access for messaging and channel operations |
+| `events:listener` | Real-time event handling for bot mentions and interactions        |
 
 ## Development
 
@@ -182,9 +191,9 @@ MIT
 
 This plugin subscribes to the Cortex event bus for real-time processing:
 
-| Event | Purpose |
-|-------|---------|
-|  | Trigger notifications when tools complete |
-|  | Detect new agent sessions |
-|  | Trigger cleanup on session end |
-|  | Send standup summaries after agent turns |
+| Event | Purpose                                   |
+| ----- | ----------------------------------------- |
+|       | Trigger notifications when tools complete |
+|       | Detect new agent sessions                 |
+|       | Trigger cleanup on session end            |
+|       | Send standup summaries after agent turns  |

@@ -1,6 +1,6 @@
 {
   "name": "cortex-plugin-slack-discord",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Cortex agent as a bot in Slack and Discord channels \u2014 respond to @mentions, send notifications, push daily standup summaries, and trigger workflows from chat",
   "kind": "esm",
   "entryPoint": "mod.ts",

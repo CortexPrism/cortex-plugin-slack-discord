@@ -1,6 +1,6 @@
 {
   "name": "cortex-plugin-slack-discord",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Cortex agent as a bot in Slack and Discord channels \u2014 respond to @mentions, send notifications, push daily standup summaries, and trigger workflows from chat",
   "kind": "esm",
   "entryPoint": "mod.ts",
@@ -200,6 +200,7 @@
       "params": []
     }
   ],
+  "dependencies": {},
   "peerDependencies": {
     "cortex": ">=1.0.0"
   },
@@ -252,8 +253,8 @@
             "key": "standupTime",
             "label": "Standup Time (UTC)",
             "type": "text",
-            "defaultValue": "09:00",
-            "description": "Time in UTC to send daily standup (HH:MM format)"
+            "description": "Time in UTC to send daily standup (HH:MM format)",
+            "default": "09:00"
           }
         ]
       }

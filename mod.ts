@@ -7,7 +7,7 @@
  * #21 in the official plugin registry.
  */
 
-import type { PluginContext, Tool, ToolCallResult, ToolContext } from './types.ts';
+import type { PluginContext, Tool, ToolCallResult } from 'cortex/plugins';
 
 // ---------------------------------------------------------------------------
 // Module-level config
@@ -140,7 +140,7 @@ const slackSendMessage: Tool = {
     capabilities: ['network:fetch'],
   },
 
-  execute: async (args: Record<string, unknown>, _ctx: ToolContext): Promise<ToolCallResult> => {
+  execute: async (args: Record<string, unknown>, _ctx: PluginContext): Promise<ToolCallResult> => {
     const start = Date.now();
     const toolName = 'slack_send_message';
     try {
@@ -229,7 +229,7 @@ const slackReadChannel: Tool = {
     capabilities: ['network:fetch'],
   },
 
-  execute: async (args: Record<string, unknown>, _ctx: ToolContext): Promise<ToolCallResult> => {
+  execute: async (args: Record<string, unknown>, _ctx: PluginContext): Promise<ToolCallResult> => {
     const start = Date.now();
     const toolName = 'slack_read_channel';
     try {
@@ -297,7 +297,7 @@ const slackListChannels: Tool = {
     capabilities: ['network:fetch'],
   },
 
-  execute: async (args: Record<string, unknown>, _ctx: ToolContext): Promise<ToolCallResult> => {
+  execute: async (args: Record<string, unknown>, _ctx: PluginContext): Promise<ToolCallResult> => {
     const start = Date.now();
     const toolName = 'slack_list_channels';
     try {
@@ -350,7 +350,7 @@ const slackAddReaction: Tool = {
     capabilities: ['network:fetch'],
   },
 
-  execute: async (args: Record<string, unknown>, _ctx: ToolContext): Promise<ToolCallResult> => {
+  execute: async (args: Record<string, unknown>, _ctx: PluginContext): Promise<ToolCallResult> => {
     const start = Date.now();
     const toolName = 'slack_add_reaction';
     try {
@@ -424,7 +424,7 @@ const discordSendMessage: Tool = {
     capabilities: ['network:fetch'],
   },
 
-  execute: async (args: Record<string, unknown>, _ctx: ToolContext): Promise<ToolCallResult> => {
+  execute: async (args: Record<string, unknown>, _ctx: PluginContext): Promise<ToolCallResult> => {
     const start = Date.now();
     const toolName = 'discord_send_message';
     try {
@@ -514,7 +514,7 @@ const discordReadChannel: Tool = {
     capabilities: ['network:fetch'],
   },
 
-  execute: async (args: Record<string, unknown>, _ctx: ToolContext): Promise<ToolCallResult> => {
+  execute: async (args: Record<string, unknown>, _ctx: PluginContext): Promise<ToolCallResult> => {
     const start = Date.now();
     const toolName = 'discord_read_channel';
     try {
@@ -597,7 +597,7 @@ const sendDailyStandup: Tool = {
     capabilities: ['network:fetch'],
   },
 
-  execute: async (args: Record<string, unknown>, _ctx: ToolContext): Promise<ToolCallResult> => {
+  execute: async (args: Record<string, unknown>, _ctx: PluginContext): Promise<ToolCallResult> => {
     const start = Date.now();
     const toolName = 'send_daily_standup';
     try {
@@ -683,7 +683,7 @@ const webhookListenStatus: Tool = {
     capabilities: [],
   },
 
-  execute: async (_args: Record<string, unknown>, _ctx: ToolContext): Promise<ToolCallResult> => {
+  execute: async (_args: Record<string, unknown>, _ctx: PluginContext): Promise<ToolCallResult> => {
     const start = Date.now();
     const status = {
       slack: {
